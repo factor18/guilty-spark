@@ -13,7 +13,7 @@ module Installers
 
     def install_oh_my_zsh
       $log.warn "#{$identity}: Installing oh-my-zsh"
-      system("sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended")
+      system("sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"")
       if !File.directory? OH_MY_ZSH_PATH
         $log.fatal "#{$identity}: #{oh_my_zsh_error_message}"
         exit(false)

@@ -2,8 +2,16 @@ module Installers
   class Prerequisites
     $brew_list = [
       {tap: "jq", command: "jq"},
+      {tap: "fzf", command: "fzf"},
+      {tap: "bat", command: "bat"},
       {tap: "tree", command: "tree"},
+      {tap: "tldr", command: "tldr"},
+      {tap: "tmux", command: "tmux"},
       {tap: "wget", command: "wget"},
+      {tap: "httpie", command: "http"},
+      {tap: "thefuck", command: "fuck"},
+      {tap: "elixir", command: "elixir"},
+      {tap: "trash-cli", command: "trash"},
     ]
 
     def ensure_installation
@@ -15,6 +23,7 @@ module Installers
           exit(false)
         end
       end
+      system("/usr/local/opt/fzf/install --all > /dev/null")
       $log.info "#{$identity}: Prerequisites are installed"
     end
   end

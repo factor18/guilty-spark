@@ -50,9 +50,11 @@ module Installers
     end
 
     def login_to_docker
+      return if logged_in?
+
       $log.info "#{$identity}: Attempting to login to docker"
       retry_count = 0
-      while `cat ~/.docker/config.json | jq -r ".auths"`.strip == "{}"
+      while logged_out?
         puts "Enter docker hub username"
         username = gets.chomp
         puts "Enter password"
@@ -69,6 +71,14 @@ module Installers
     end
 
     private
+
+    def logged_in?
+      `cat ~/.docker/config.json | jq -r ".auths"`.strip != "{}"
+    end
+
+    def logged_out?
+      !logged_in?
+    end
 
     def docker_error_message
       [
